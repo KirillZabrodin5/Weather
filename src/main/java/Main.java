@@ -3,24 +3,21 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        var resolver = new ClassLoaderTemplateResolver();
-        resolver.setTemplateMode(TemplateMode.HTML);
-        resolver.setCharacterEncoding("UTF-8");
-        resolver.setPrefix("/templates/");
-        resolver.setSuffix(".html");
+        //TODO в сервлете
+        ClassLoaderTemplateResolver classLoaderTemplateResolver = new ClassLoaderTemplateResolver();
+        classLoaderTemplateResolver.setTemplateMode("HTML");
+        classLoaderTemplateResolver.setPrefix("templates/"); //сделать константу префикса и суффикса
+        classLoaderTemplateResolver.setSuffix(".html");
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(classLoaderTemplateResolver);
 
         var context = new Context();
-        context.setVariable("name", "Bunny");
-        context.setVariable("date", LocalDate.now().toString());
-
-        var templateEngine = new TemplateEngine();
-        templateEngine.setTemplateResolver(resolver);
-
-        var result = templateEngine.process("index", context);
+        context.setVariable("username", new String("Kirill"));
+        var result = templateEngine.process("examle", context);
         System.out.println(result);
         //TODO: код для добавления в БД сущности
 //        Configuration configuration = new Configuration();

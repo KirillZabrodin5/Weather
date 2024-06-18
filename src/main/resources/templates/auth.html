@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head - это блок, который не видит пользователь    -->
+<head>
+    <meta charset="utf-8" />
+    <title>Authorization</title>
+</head>
+<!--body - это блок, который видит пользователь-->
+<body>
+<h2>Авторизация</h2>
+<form>
+    <input type="hidden" name="action" value="login">
+    <div>
+        <label for="login">Login:</label>
+        <input type="text" id="login" name="login">
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <br>
+        <button type="submit">Войти</button>
+        </br>
+    </div>
+</form>
+</body>

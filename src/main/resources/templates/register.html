@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head - это блок, который не видит пользователь    -->
+    <head>
+        <meta charset="utf-8" />
+        <title>Register</title>
+    </head>
+<!--body - это блок, который видит пользователь-->
+    <body>
+        <h2>Регистрация</h2>
+        <form action="/register" method="post">
+            <input type="hidden" name="action" value="login">
+            <div>
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login">
+            </div>
+            <div> <!-- добавить сюда сравнение 2 паролей - если разные, то сообщать об этом-->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <label for="Repeat password">Repeat password:</label>
+                <input type="password" id="Repeat password" name="Repeat password">
+            </div>
+            <div>
+                <br>
+                <button type="submit">Сохранить</button>
+                </br>
+            </div>
+        </form>
+    </body>
+</html>
