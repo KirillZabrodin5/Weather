@@ -13,7 +13,7 @@ public class Main {
                 .build();
 
         UserDao userDao = new UserDao();
-        System.out.println(userDao.findById("fea.z").orElseThrow());
+        System.out.println(userDao.save(user).orElseThrow());
 
 //        //TODO: код для добавления в БД сущности
 //        Configuration configuration = new Configuration();
