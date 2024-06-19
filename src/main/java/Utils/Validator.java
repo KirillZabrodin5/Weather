@@ -4,7 +4,7 @@ import exception.NotFoundException;
 
 public final class Validator {
     public static void isEmptyLogin(String parameter) {
-        if(parameter.equals("")) {
+        if(parameter.isEmpty()) {
             throw new NotFoundException("Логин не должен быть пустым");
         }
     }

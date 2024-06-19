@@ -1,6 +1,7 @@
 package servlet;
 
 import Utils.Validator;
+import dao.UserDao;
 import entity.User;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.http.Cookie;
@@ -13,6 +14,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import service.Encryption;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -21,6 +24,7 @@ public class RegisterServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private static final String PREFIX = "templates/";
     private static final String SUFFIX = ".html";
+    private static final UserDao userDao = new UserDao();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -51,8 +55,13 @@ public class RegisterServlet extends HttpServlet {
         Validator.isEmptyLogin(login);
         Validator.equalsPassword(password, repeatedPassword);
 
+        Encryption encryption = new Encryption();
+        password = encryption.encrypt(password);
+
         User user = new User(null, login, password);
-        //save(user) TODO вместо этой строки надо в бд сохранять данные пользователя
+
+        userDao.save(user).orElseThrow();
+
         resp.sendRedirect("/hello?username=" + login);
         //TODO подумать, куда редирект делать после регистрации
     }

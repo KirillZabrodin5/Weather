@@ -6,8 +6,10 @@ import exception.EntityExistsException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +29,8 @@ public class UserDao {
             session.getTransaction().commit();
 
             return Optional.of(user);
+        } catch (ConstraintViolationException e) {
+            throw new EntityExistsException("Этот логин уже занят. Придумайте другой");
         }
     }
 
