@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/hello")
-public class FirstServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private static final String PREFIX = "templates/";
     private static final String SUFFIX = ".html";

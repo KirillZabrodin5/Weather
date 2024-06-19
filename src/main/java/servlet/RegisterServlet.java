@@ -3,6 +3,7 @@ package servlet;
 import Utils.Validator;
 import entity.User;
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.http.Cookie;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
@@ -13,9 +14,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet("/register")
-public class AuthServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private static final String PREFIX = "templates/";
     private static final String SUFFIX = ".html";
@@ -46,6 +48,7 @@ public class AuthServlet extends HttpServlet {
         String password = req.getParameter("password");
         String repeatedPassword = req.getParameter("Repeat password");
 
+        Validator.isEmptyLogin(login);
         Validator.equalsPassword(password, repeatedPassword);
 
         User user = new User(null, login, password);
