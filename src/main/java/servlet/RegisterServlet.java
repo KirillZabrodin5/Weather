@@ -4,20 +4,17 @@ import Utils.Validator;
 import dao.UserDao;
 import entity.User;
 import jakarta.servlet.ServletConfig;
-import jakarta.servlet.http.Cookie;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import service.Encryption;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -62,8 +59,8 @@ public class RegisterServlet extends HttpServlet {
 
         userDao.save(user).orElseThrow();
 
-        resp.sendRedirect("/hello?username=" + login);
-        //TODO подумать, куда редирект делать после регистрации
-    }
+        resp.sendRedirect("/registration.successful?username=" + login);
 
+        //TODO добавить кнопку с ссылкой на авторизацию
+    }
 }
