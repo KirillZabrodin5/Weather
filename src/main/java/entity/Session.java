@@ -21,7 +21,7 @@ public class Session {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     @Column(name="UserId")
-    private Integer userId;
+    private Long userId;
     @Column(name="ExpiresAt")
     private LocalDateTime expiresAt;
 }

@@ -50,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
         String repeatedPassword = req.getParameter("Repeat password");
 
         Validator.isEmptyLogin(login);
-        Validator.equalsPassword(password, repeatedPassword);
+        Validator.passwordIsValid(password, repeatedPassword);
 
         Encryption encryption = new Encryption();
         password = encryption.encrypt(password);

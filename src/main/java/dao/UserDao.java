@@ -6,7 +6,6 @@ import exception.EntityExistsException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
@@ -16,6 +15,7 @@ import java.util.Optional;
 
 public class UserDao {
     private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
     static {
         HibernateUtil.addEntityToConfiguration(User.class);
     }
@@ -68,7 +68,7 @@ public class UserDao {
     }
 
     public Optional<User> delete(User user) {
-        try(Session session = sessionFactory.openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.remove(user);
             session.getTransaction().commit();

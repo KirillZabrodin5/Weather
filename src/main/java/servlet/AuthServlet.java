@@ -12,7 +12,6 @@ import jakarta.servlet.http.*;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import service.Encryption;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -56,7 +55,7 @@ public class AuthServlet extends HttpServlet {
 
         User user = userDao.findById(login).orElseThrow();
 
-        Validator.equalsPassword(password, user.getPassword());
+        Validator.passwordIsValid(password, user.getPassword());
 
         UUID uuidSession = UUID.randomUUID();//это должно в ДАО слое происходить, я думаю
 

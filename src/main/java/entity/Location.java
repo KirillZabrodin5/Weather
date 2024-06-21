@@ -18,11 +18,11 @@ import java.math.BigDecimal;
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "Name")
     private String name;
     @Column(name = "UserId")
-    private Integer userId;
+    private Long userId;
     @Column(name = "Latitude")
     private BigDecimal latitude;
     @Column(name = "Longitude")

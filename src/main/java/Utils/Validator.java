@@ -1,5 +1,6 @@
 package Utils;
 
+import exception.InvalidParameterException;
 import exception.NotFoundException;
 
 public final class Validator {
@@ -9,9 +10,12 @@ public final class Validator {
         }
     }
 
-    public static void equalsPassword(String password, String repeatPassword) {
+    public static void passwordIsValid(String password, String repeatPassword) {
+        if (password.length() < 3) {
+            throw new InvalidParameterException("Пароли слишком короткий, добавьте еще символов!");
+        }
         if (!password.equals(repeatPassword)) {
-            throw new RuntimeException("Пароли не совпадают, попробуйте еще раз!");
+            throw new InvalidParameterException("Пароли не совпадают, попробуйте еще раз!");
         }
     }
 }
