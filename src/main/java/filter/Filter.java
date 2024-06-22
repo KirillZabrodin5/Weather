@@ -22,8 +22,9 @@ public class Filter extends HttpFilter {
         try {
             res.setStatus(HttpServletResponse.SC_OK);
             super.doFilter(req, res, chain);
-        } catch (InvalidParameterException e) {
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        } catch (Exception e) {
+            //res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            res.getWriter().println(e.getMessage());
             //writeExceptionToResponse(response, HttpServletResponse.SC_BAD_REQUEST, e);
         }
     }

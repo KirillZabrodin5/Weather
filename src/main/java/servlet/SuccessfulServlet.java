@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/registration.successful")
-public class HelloServlet extends HttpServlet {
+public class SuccessfulServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private static final String PREFIX = "templates/";
     private static final String SUFFIX = ".html";
@@ -37,7 +37,7 @@ public class HelloServlet extends HttpServlet {
 
         var context = new Context();
         context.setVariable("username", username);
-        var result = templateEngine.process("examle", context);
+        var result = templateEngine.process("successful", context);
 
         resp.getWriter().println(result);
     }

@@ -55,20 +55,20 @@ public class AuthServlet extends HttpServlet {
 
         User user = userDao.findById(login).orElseThrow();
 
-        Validator.passwordIsValid(password, user.getPassword());
+        Validator.passwordIsValidWithHash(password, user.getPassword());
 
-        UUID uuidSession = UUID.randomUUID();//это должно в ДАО слое происходить, я думаю
-
-        HttpSession session = req.getSession(true);
-        session.setAttribute("id", uuidSession);
-
-        Session sessionDB = new Session(uuidSession, user.getId(), LocalDateTime.now().plusDays(1));
-
-        SessionDao sessionDao = new SessionDao();
-        sessionDao.save(sessionDB);
-
-        Cookie cookie = new Cookie("sessionId", uuidSession.toString());
-        resp.addCookie(cookie);
+//        UUID uuidSession = UUID.randomUUID();//это должно в ДАО слое происходить, я думаю
+//
+//        HttpSession session = req.getSession(true);
+//        session.setAttribute("id", uuidSession);
+//
+//        Session sessionDB = new Session(uuidSession, user.getId(), LocalDateTime.now().plusDays(1));
+//
+//        SessionDao sessionDao = new SessionDao();
+//        sessionDao.save(sessionDB);
+//
+//        Cookie cookie = new Cookie("sessionId", uuidSession.toString());
+//        resp.addCookie(cookie);
 
         //тут надо получить уже с id сессию. То есть записать в бд текущую сессию
         // и взять её заново, но уже с ID и отправить этот id в куки
