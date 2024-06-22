@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -18,6 +19,12 @@ public class Filter extends HttpFilter {
         req.setCharacterEncoding("UTF-8");
         res.setCharacterEncoding("UTF-8");
         res.setContentType("text/html");
+
+        HttpSession session = req.getSession(false);
+
+//        if(session == null || session.getAttribute("userId") == null) {
+//            res.sendRedirect("/auth");
+//        }
 
         try {
             res.setStatus(HttpServletResponse.SC_OK);

@@ -16,8 +16,8 @@ import service.Encryption;
 
 import java.io.IOException;
 
-@WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet("/registration")
+public class RegistrationServlet extends HttpServlet {
     private TemplateEngine templateEngine;
     private static final String PREFIX = "templates/";
     private static final String SUFFIX = ".html";
@@ -36,15 +36,15 @@ public class RegisterServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         var context = new Context();
-        var result = templateEngine.process("register", context);
+        var result = templateEngine.process("registration", context);
         resp.getWriter().println(result);
     }
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String repeatedPassword = req.getParameter("Repeat password");
@@ -60,7 +60,5 @@ public class RegisterServlet extends HttpServlet {
         userDao.save(user).orElseThrow();
 
         resp.sendRedirect("/registration.successful?username=" + login);
-
-        //TODO добавить кнопку с ссылкой на авторизацию
     }
 }

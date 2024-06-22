@@ -6,16 +6,14 @@ import exception.EntityExistsException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 import java.util.Optional;
 
-public class UserDao {
-    private static final SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
+public class UserDao implements CrudDao<User, String> {
     static {
         HibernateUtil.addEntityToConfiguration(User.class);
     }
@@ -38,6 +36,8 @@ public class UserDao {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
+
+
             CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> userRoot = criteriaQuery.from(User.class);
@@ -55,6 +55,7 @@ public class UserDao {
         }
     }
 
+    //этот метод понадобится в случаях, когда пользователь захочет сменить пароль
     public Optional<User> update(User user) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
@@ -64,15 +65,20 @@ public class UserDao {
             session.getTransaction().commit();
 
             return Optional.of(updateUser);
+        } catch (HibernateException e) {
+            throw new HibernateException("Не получилось обновить");
         }
     }
 
+    //этот метод понадобится в случаях, когда пользователь захочет удалить свой аккаунт
     public Optional<User> delete(User user) {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.remove(user);
             session.getTransaction().commit();
+            return Optional.of(user);
+        } catch (HibernateException e) {
+            throw new HibernateException("Не получилось удалить");
         }
-        return Optional.of(user);
     }
 }

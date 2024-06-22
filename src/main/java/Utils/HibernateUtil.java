@@ -19,7 +19,7 @@ public final class HibernateUtil {
         }
     }
 
-    public static void addEntityToConfiguration(Class entity) {
+    public static void addEntityToConfiguration(Class<?> entity) {
         configuration.addAnnotatedClass(entity);
     }
 }

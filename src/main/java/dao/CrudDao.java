@@ -1,7 +1,18 @@
 package dao;
 
-import org.mindrot.jbcrypt.BCrypt;
+import Utils.HibernateUtil;
+import org.hibernate.SessionFactory;
 
-public class CrudDao {
-    //crud операции наверное делает hibernate
+import java.util.Optional;
+
+public interface CrudDao<T, ID> {
+    SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+
+    Optional<T> save(T t);
+
+    Optional<T> findById(ID id);
+
+    Optional<T> update(T t);
+
+    Optional<T> delete(T t);
 }

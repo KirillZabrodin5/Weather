@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Builder
 @Table(name="Sessions")
-public class Session {
+public class SessionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
