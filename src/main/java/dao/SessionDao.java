@@ -2,7 +2,6 @@ package dao;
 
 import Utils.HibernateUtil;
 import entity.SessionEntity;
-import entity.User;
 import exception.EntityExistsException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -20,7 +19,7 @@ public class SessionDao implements CrudDao<SessionEntity, UUID> {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
 
-            session.persist(sessionEntity);
+            session.merge(sessionEntity);
 
             session.getTransaction().commit();
             return Optional.of(sessionEntity);

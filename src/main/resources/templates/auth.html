@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--head - это блок, который не видит пользователь    -->
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Authorization</title>
 </head>
 <!--body - это блок, который видит пользователь-->
 <body>
 <h2>Авторизация</h2>
-<form  action="/auth" method="post">
+<form action="/auth" method="post">
     <input type="hidden" name="action" value="login">
     <div>
         <label for="login">Login:</label>
@@ -21,7 +21,13 @@
     <div>
         <br>
         <button type="submit">Войти</button>
-        </br>
+    </div>
+</form>
+
+<form action="/registration" method="post">
+    <input type="hidden" name="action" value="login">
+    <div>
+        <button type="submit">Зарегистрироваться</button>
     </div>
 </form>
 </body>
